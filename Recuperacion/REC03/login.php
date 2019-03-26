@@ -27,7 +27,7 @@
                 $pass=$_POST["pass"];
                 $texto="players.txt";
                 $usuarios=ficheroToArray($texto);
-                var_dump ($usuarios);
+                //var_dump ($usuarios);
                 $fila=busquedaFilaSecuencial($usuarios,$user,0);
                 
                 if($fila===false){
