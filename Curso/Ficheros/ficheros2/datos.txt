@@ -1,0 +1,7 @@
+sergio~1234~admin~
+borja~4321~cliente~
+rosalia~7777~cliente~
+maria~754~cliente~
+pepepa~1234~cliente~
+paco~1234~admin~
+marc~234~cliente~

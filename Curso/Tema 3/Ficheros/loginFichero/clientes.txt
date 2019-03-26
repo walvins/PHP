@@ -1,0 +1,6 @@
+71291368~aaaaaa~Administrador~
+58469257~bbbbbb~Cliente~
+48596258~cccccc~Cliente~
+85478124~dddddd~Cliente~
+84569871~eeeeee~Cliente~
+54001204~ffffff~Cliente

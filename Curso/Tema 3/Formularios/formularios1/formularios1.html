@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!--
+        Crea el siguiente formulario de captura de datos personales con la validaciones propuestas. Campos: 1. Apellidos, nombre (con este formato) 2. Fecha de nacimiento (debe ser mayor de edad). 3. Provincia de nacimiento (solo de esta comunidad) 4. Sexo (hombre o mujer). 5. Estado Civil (S, C, D). 6. Idiomas que "domina" (Ingles, Francés, Alemán, Chino, Ruso y/o Portugués). 7. Observaciones (comentario abierto). Nota: Mostrar los contenidos de $_REQUEST y/o $_POST y/o $_GET .
+    -->
+
+
+    <!--
+        La validación se hace dentro del html y antes del formulario
+    -->
+    <form method="POST" action="mostrar.php">
+        Apellidos, nombre <input type="text" name="apenom" placeholder="Apellido1 Apellido2, Nombre" value="<?php if ($error==0) echo $_REQUEST ['apenom']; ?>" ><br>
+
+        Fecha de nacimiento <input type="text" name="nac" placeholder= "dd/mm/aaaa" value="<?php if ($error==0) echo $_REQUEST ['nac']; ?>" ><br>
+
+        Provincia de nacimiento <input type="text" name="prov" value="<?php if ($error==0) echo $_REQUEST ['prov']; ?>"><br>
+
+        Sexo <input type="radio" name="sexo" value="hombre"/>Hombre <input type="radio" name="sexo" value="mujer" />Mujer<br>
+
+        Estado civil <input type="radio" name="estado" value="S"/>S <input type="radio" name="estado" value="C"/>C 
+        <input type="radio" name="estado" value="D"/>D <br>
+
+        Idiomas que domina: 
+        <select multiple name="idiomas[]">
+        <option value="Ingles">Ingles</option>
+        <option value="Francés">Francés</option>
+        <option value="Alemán">Alemán</option>
+        <option value="Chino">Chino</option>
+        <option value="Ruso">Ruso</option>
+        <option value="Portugués">Portugués</option> 
+
+        </select><br>
+        Observaciones: <br/> <textarea rows="10" cols="40" name="obs" value="<?php if($error==0) echo $_REQUEST ['obs']; ?>"></textarea><br/> 
+        <input type="submit" name="enviar"/><br/>
+
+    </form>
+</body>
+</html>

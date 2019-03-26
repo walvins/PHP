@@ -1,0 +1,6 @@
+71291368~"aaaaaa"~"Martinez Rodrigez, Raul"~"10/11/2000"~"Soria"~2397~
+58469257~"bbbbbb"~"Goxiola Gatxez, Patxi"~"06/06/1986"~"Murcia"~6666~
+48596258~"cccccc"~"Perez Lopez, Maria"~"31/08/1997"~"Burgos"~10000~
+85478124~"dddddd"~"Martin Sardon, Eva"~"16/05/1990"~"Vitoria"~210~
+84569871~"eeeeee"~"Garcia Alcalde, Manuel"~"17/02/1980"~"Valladolid"~3566~
+54001204~"ffffff"~"Maldonado Peña, Susana"~"28/01/1975"~"Burgos"~1500~

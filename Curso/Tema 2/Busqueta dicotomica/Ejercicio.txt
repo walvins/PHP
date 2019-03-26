@@ -1,0 +1,8 @@
+1)Crear lista de valores aleatorios de 1 a 100000 compuesta por 10000 numeros, ordenar la lista ascendentemente, 
+tiempo medio que se tarda en hacer 50 busquedas secuenciales
+2)IDEM con busqueda binaria dicotomica
+3)Inventar nuestro propio metodo (LOL)
+Pasos:
+el total de puestos lo divido entre 10
+cojo los valores y miro lo de despues a ver si esta, si encuentras uno mas grande me he pasado, asi que retrocedo
+divido entre 10 la nueva sección

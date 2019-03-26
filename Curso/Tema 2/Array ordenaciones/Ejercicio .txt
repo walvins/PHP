@@ -1,0 +1,1 @@
+Almacenar en array: dni, "ape1 ape2, nombre",fecha ,localidad, saldo

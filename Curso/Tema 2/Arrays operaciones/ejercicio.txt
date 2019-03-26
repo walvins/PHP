@@ -1,0 +1,8 @@
+Contemplar esto en la lista de 20:
+A) Sin repetir y sin orden
+B) Sin repetir y con orden
+c) Con repeticion sin orden
+D) Con repeticion con orden
+Calcular mayor, menor, total y media
+
+Sin repetir con un for se hace

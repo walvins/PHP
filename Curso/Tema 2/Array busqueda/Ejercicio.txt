@@ -1,0 +1,5 @@
+Meter array con dni, primero buscar el dni con el desordenado, sin repeticion.
+        segundo, busqueda repetido y desordenado,
+        tercero, hay orden, el dato no se repite
+        cuarto, hay orden, el dato se repite
+quinto, orden por localidades, sacar el total de cuotas

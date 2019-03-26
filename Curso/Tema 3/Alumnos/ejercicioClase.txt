@@ -1,0 +1,6 @@
+dni,nombre,nota1 eva, 2eva, 3eva
+aplicando funciones: 
+1º funcion: que alumno tiene la mejor nota en una evaluacion (Le enviamos nosotros la evaluacion)
+2º funcion: nota maxima, minima, media de una determinada evaluacion
+3º funcion: ordenar por dni, ordenar por alumno
+4º funcion: ordenarla por nota media del curso
