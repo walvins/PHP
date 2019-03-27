@@ -47,15 +47,22 @@
                 //Motor del juego
                 $herido=heridos($numAdivinar,$numElegido);
                 $muerto=muertos($numAdivinar,$numElegido);
+                if(empty($_SESSION["intentos"])){
                 $intentos=0;
+                }else{
+                $intentos=$_SESSION["intentos"];
+                }
                 if($herido==0 && $muerto==4){
                     echo "Has ganado. Numero de intentos: $intentos";
+                    session_destroy();  //Problema, se destruyen todas las sesiones                 Cambiar las sesiones numelegido e intentos por cookies
                 }else{
                 $intentos++;
+                $_SESSION["intentos"]=$intentos;
                 echo"<br>";
                 echo "Heridos: ".$herido."<br>";
                 echo "Muertos: ".$muerto."<br>";
-                echo "Numero de intentos: $intentos";
+                echo "Numero de intentos: ".$_SESSION["intentos"];
+                
             }
         }
     }
