@@ -23,7 +23,7 @@
             echo $numAdivinar[$i];
         }
     ?>
-        <h1>MAsterMind</h1>
+        <h1>MasterMind</h1>
         <form method="POST" action="juego.php">
         <label>Introduce un numero de 4 cifras DISTINTAS <input type="text" name="numElegido" pattern="[0-9]{4}"></label><br>
         <button type="submit" name="enviar">Prueba suerte</button>
@@ -71,26 +71,26 @@
         return $repetida;
     }
 
-    function heridos($num1p,$num2p){    //Recordar que los parametros son arrays
-        $punto=0;
+    function heridos($num1p,$num2p){    
+        $puntoHerido=0;
         for ($i=0; $i <count($num1p) ; $i++) { 
             for ($j=0; $j <count($num2p) ; $j++) { 
-                if($num1p[$i]==$num2p[$j] && $num1p[$i]==$num2p[$i]){
-                    $punto++;
+                if($num1p[$i]==$num2p[$j] && $num1p[$i]!=$num2p[$i]){
+                    $puntoHerido++;
                 }
             }
         }
-        return $punto;
+        return $puntoHerido;
     }
 
     function muertos($num1p,$num2p){
-        $punto=0;
+        $puntoMuerto=0;
         for ($i=0; $i <count($num1p) ; $i++) { 
             if($num1p[$i]==$num2p[$i]){
-                $punto++;
+                $puntoMuerto++;
             }
         }
-        return $punto;
+        return $puntoMuerto;
     }
     ?>
 </body>
