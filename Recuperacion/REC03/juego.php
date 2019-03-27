@@ -18,7 +18,7 @@
         $numAdivinar = $_SESSION['generado'];
         }
         
-        //Guardar el numero en una sesion para usar en otro momento
+        
         for ($i=0; $i <count($numAdivinar) ; $i++) { 
             echo $numAdivinar[$i];
         }
@@ -48,13 +48,17 @@
                 $herido=heridos($numAdivinar,$numElegido);
                 $muerto=muertos($numAdivinar,$numElegido);
                 $intentos=0;
-
-                
+                if($herido==0 && $muerto==4){
+                    echo "Has ganado. Numero de intentos: $intentos";
+                }else{
+                $intentos++;
                 echo"<br>";
                 echo "Heridos: ".$herido."<br>";
-                echo "Muertos: ".$muerto;
+                echo "Muertos: ".$muerto."<br>";
+                echo "Numero de intentos: $intentos";
             }
         }
+    }
 
 
     //Funciones
