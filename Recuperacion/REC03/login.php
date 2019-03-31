@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Login</title>
 </head>
 <body>
     <?php
@@ -36,6 +36,7 @@
                     if($usuarios[$fila][1]!=$pass){
                         echo '<script>alert("Contraseña incorrecta");</script>';
                     }else{
+                        $_SESSION['usuario']=$user;
                         header ("location:juego.php");
                     }
                 }

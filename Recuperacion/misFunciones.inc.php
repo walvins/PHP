@@ -73,11 +73,11 @@ function agrupacionDatos($datosp, $colp)
 }
 
 //Generar un numero aleatorio
-function generarNumero(){
+function generarNumero($cifrap){
     $cifra[0]=rand(0,9);
     $contador=0;
 
-    for ($i=1; $i <4 ; $i++) { 
+    for ($i=1; $i <$cifrap ; $i++) { 
         $anterior=0;
         $cifra[$i]=rand(0,9);
         while($anterior<$i){
@@ -113,4 +113,34 @@ function ficheroToArray($fich){
         fflush($varfich);
         fclose($varfich);
         return $tabla;
+}
+
+//Pasar array a fichero
+function arrayToFichero($arrayp,$ficherop){
+    if(!file_exists($ficherop)){
+        $varfich=fopen($ficherop, "w");
+    }
+    else{
+        $varfich=fopen($ficherop,"a");
+    }
+    for($i=0;$i<count($arrayp);$i++){
+        
+        if($i==count($arrayp)-1){
+            $linea=($arrayp[$i][0]."~".$arrayp[$i][1]."~".$arrayp[$i][2]."~".$arrayp[$i][3]);
+            fputs($varfich,$linea);
+        }else{
+            $linea=($arrayp[$i][0]."~".$arrayp[$i][1]."~".$arrayp[$i][2]."~".$arrayp[$i][3]);
+            fputs($varfich,$linea);
+        }
+    }
+    fflush($varfich);
+    fclose($varfich);
+}
+
+//Borrar todo el contenido de un fichero
+function borrarTexto($ficherop){
+    $arch="";
+    $arch = fopen ("players.txt", "w+");
+    fwrite($arch, "");
+    fclose($arch);
 }

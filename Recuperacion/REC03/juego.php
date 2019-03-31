@@ -10,9 +10,10 @@
     <?php
         include "../misFunciones.inc.php";
         session_start();
+        $user=$_SESSION['usuario'];
         
         if(empty($_SESSION['generado'])){
-        $_SESSION['generado'] = generarNumero();
+        $_SESSION['generado'] = generarNumero(4);
         }
         if(isset( $_SESSION['generado'])){
         $numAdivinar = $_SESSION['generado'];
@@ -21,7 +22,7 @@
         
         for ($i=0; $i <count($numAdivinar) ; $i++) { 
             echo $numAdivinar[$i];
-        }
+        }   echo"<--Borrar esto en la version final";
     ?>
         <h1>MasterMind</h1>
         <form method="POST" action="juego.php">
@@ -53,8 +54,26 @@
                 $intentos=$_SESSION["intentos"];
                 }
                 if($herido==0 && $muerto==4){
+                    
                     echo "Has ganado. Numero de intentos: $intentos";
-                    session_destroy();  //Problema, se destruyen todas las sesiones                 Cambiar las sesiones numelegido e intentos por cookies
+                    //Idea: ficherotoArray, buscar el nuevo dato y modificarlo,borrar contenido, pegar nuevo contenido, cerrar las sesiones
+
+                    //Pasar a array
+                    $texto="players.txt";
+                    $usuarios=ficheroToArray($texto);
+
+                    //Borrar contenido del fichero
+                    borrarTexto($texto);
+                    
+                    //Modificar datos
+                    $fila=busquedaFilaSecuencial($usuarios, $user, 0);
+                    $usuarios[$fila][2]=$intentos;
+
+                    //Pasar al fichero vacio
+                    arrayToFichero($usuarios,$texto);
+
+                    //Destruir
+                    session_destroy(); 
                 }else{
                 $intentos++;
                 $_SESSION["intentos"]=$intentos;
