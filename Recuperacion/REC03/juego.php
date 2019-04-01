@@ -23,6 +23,7 @@
         for ($i=0; $i <count($numAdivinar) ; $i++) { 
             echo $numAdivinar[$i];
         }   echo"<--Borrar esto en la version final";
+
     ?>
         <h1>MasterMind</h1>
         <form method="POST" action="juego.php">
@@ -66,22 +67,32 @@
                     borrarTexto($texto);
                     
                     //Modificar datos
+                    //Guardar intentos
                     $fila=busquedaFilaSecuencial($usuarios, $user, 0);
                     $usuarios[$fila][2]=$intentos;
 
+                    //Guardar fecha
+                    $hoy=hoy();
+                    if($fila<count($usuarios)-1){
+                        $usuarios[$fila][3]=(string)$hoy.PHP_EOL;
+                    }else{
+                        $usuarios[$fila][3]=(string)$hoy;
+                    }
                     //Pasar al fichero vacio
                     arrayToFichero($usuarios,$texto);
 
                     //Destruir
                     session_destroy(); 
-                }else{
+                }else{    
                 $intentos++;
                 $_SESSION["intentos"]=$intentos;
                 echo"<br>";
                 echo "Heridos: ".$herido."<br>";
                 echo "Muertos: ".$muerto."<br>";
                 echo "Numero de intentos: ".$_SESSION["intentos"];
+                //Añadir tabla de intentos anteriores
                 
+
             }
         }
     }

@@ -115,7 +115,7 @@ function ficheroToArray($fich){
         return $tabla;
 }
 
-//Pasar array a fichero
+//Pasar array a fichero, no es una funcion general
 function arrayToFichero($arrayp,$ficherop){
     if(!file_exists($ficherop)){
         $varfich=fopen($ficherop, "w");
@@ -124,14 +124,26 @@ function arrayToFichero($arrayp,$ficherop){
         $varfich=fopen($ficherop,"a");
     }
     for($i=0;$i<count($arrayp);$i++){
-        
+        $linea="";
+        for($j=0;$j<count($arrayp[0]);$j++){
+            if ($j!=count($arrayp[0])-1){
+                $linea.=$arrayp[$i][$j]."~";
+            }else{
+                $linea.=$arrayp[$i][$j];
+            }
+            
+        }
+        fputs($varfich,$linea);
+        /*
         if($i==count($arrayp)-1){
-            $linea=($arrayp[$i][0]."~".$arrayp[$i][1]."~".$arrayp[$i][2]."~".$arrayp[$i][3]);
+            $linea=($arrayp[$i][0]."~".$arrayp[$i][1]."~".$arrayp[$i][2]."~".$arrayp[$i][3]); //Añadir o quitar indices dependiendo las columnas
             fputs($varfich,$linea);
         }else{
             $linea=($arrayp[$i][0]."~".$arrayp[$i][1]."~".$arrayp[$i][2]."~".$arrayp[$i][3]);
             fputs($varfich,$linea);
+
         }
+        */
     }
     fflush($varfich);
     fclose($varfich);
@@ -143,4 +155,11 @@ function borrarTexto($ficherop){
     $arch = fopen ("players.txt", "w+");
     fwrite($arch, "");
     fclose($arch);
+}
+
+//Funcion de la fecha de hoy formato dia/mes/año
+function hoy(){
+    date_default_timezone_set('Europe/Madrid');
+    $hoy=date('d/m/Y');
+    return $hoy;
 }
