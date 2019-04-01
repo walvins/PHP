@@ -74,9 +74,9 @@
                     //Guardar fecha
                     $hoy=hoy();
                     if($fila<count($usuarios)-1){
-                        $usuarios[$fila][3]=(string)$hoy.PHP_EOL;
+                        $usuarios[$fila][3]=$hoy.PHP_EOL;
                     }else{
-                        $usuarios[$fila][3]=(string)$hoy;
+                        $usuarios[$fila][3]=$hoy;
                     }
                     //Pasar al fichero vacio
                     arrayToFichero($usuarios,$texto);
