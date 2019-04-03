@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login</title>
+
+    <style>
+        td{
+            border:2px solid black;
+        }
+    </style>
 </head>
 <body>
     <?php
@@ -16,6 +22,11 @@
         <label>Usuario: <input type="text" name="user"></label><br>
         <label>Contraseña: <input type="text" name="pass"></label><br>
         <button type="submit" name="enviar">Jugar</button>
+    </form>
+
+    <p>¿Nuevo usuario? Registrate</p>
+    <form method="POST" action="login.php">
+    <button type="submit" name="registrar">Registrarse</button>
     </form>
 
     <?php
@@ -42,6 +53,19 @@
                 }
             }
         }
+        if(isset($_POST["registrar"])){
+            header("location:alta.php");
+        }
     ?>
+
+    <div>
+        <h1>top 5 de la semana</h1>
+        <?php
+        $cabecera=array("usuario","intentos","fecha");
+        $usuarios=ficheroToArray("players.txt");
+        $usuarios=burbuja($usuarios,2);
+        
+        ?>
+    <div>
 </body>
 </html>

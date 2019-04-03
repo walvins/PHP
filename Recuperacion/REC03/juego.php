@@ -49,6 +49,7 @@
                 //Motor del juego
                 $herido=heridos($numAdivinar,$numElegido);
                 $muerto=muertos($numAdivinar,$numElegido);
+
                 if(empty($_SESSION["intentos"])){
                 $intentos=0;
                 }else{
@@ -90,9 +91,21 @@
                 echo "Heridos: ".$herido."<br>";
                 echo "Muertos: ".$muerto."<br>";
                 echo "Numero de intentos: ".$_SESSION["intentos"];
-                //Añadir tabla de intentos anteriores
-                
 
+
+                //Añadir tabla de intentos anteriores
+                $cabeceraMensaje=array("numero","heridos","muertos");
+                $numeroElegidoString="";
+                for ($i=0; $i <count($numElegido) ; $i++) { 
+                    $numeroElegidoString.=$numElegido[$i];
+                }
+                if(isset($_SESSION["mensaje"])){
+                    $arraytabla=$_SESSION["mensaje"];
+                }
+               
+                $arraytabla[]=array($numeroElegidoString,$herido,$muerto);
+                mostrarTabla($cabeceraMensaje,$arraytabla);
+                $_SESSION["mensaje"]=$arraytabla;
             }
         }
     }
