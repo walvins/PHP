@@ -20,15 +20,18 @@ function mostrarTabla($cabecerap, $datosp)
 //Burbuja
 function burbuja($datosp, $columnap)
 {
-    for ($j = 0; $j < count($datosp); $j++) {
-        for ($i = count($datosp) - 1; $i > $j; $i--) {
-            if ($datosp[$i][$columnap] < $datosp[$i - 1][$columnap]) {
-                $aux = $datosp[$i];
-                $datosp[$i] = $datosp[$i - 1];
-                $datosp[$i - 1] = $aux;
+    $ordenado=$datosp;
+    for ($j = 0; $j < count($ordenado); $j++) {
+        for ($i = count($ordenado) - 1; $i > $j; $i--) {
+            if ($ordenado[$i][$columnap] < $ordenado[$i - 1][$columnap]) {
+                $aux = $ordenado[$i];
+                $ordenado[$i] = $ordenado[$i - 1];
+                $ordenado[$i - 1] = $aux;
             }
         }
     }
+
+    return $ordenado;
 }
 
 //Busqueda secuencial
@@ -115,7 +118,7 @@ function ficheroToArray($fich){
         return $tabla;
 }
 
-//Pasar array a fichero, no es una funcion general
+//Pasar array a fichero,
 function arrayToFichero($arrayp,$ficherop){
     if(!file_exists($ficherop)){
         $varfich=fopen($ficherop, "w");
@@ -134,16 +137,6 @@ function arrayToFichero($arrayp,$ficherop){
             
         }
         fputs($varfich,$linea);
-        /*
-        if($i==count($arrayp)-1){
-            $linea=($arrayp[$i][0]."~".$arrayp[$i][1]."~".$arrayp[$i][2]."~".$arrayp[$i][3]); //Añadir o quitar indices dependiendo las columnas
-            fputs($varfich,$linea);
-        }else{
-            $linea=($arrayp[$i][0]."~".$arrayp[$i][1]."~".$arrayp[$i][2]."~".$arrayp[$i][3]);
-            fputs($varfich,$linea);
-
-        }
-        */
     }
     fflush($varfich);
     fclose($varfich);
