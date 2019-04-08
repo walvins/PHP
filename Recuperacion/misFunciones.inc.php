@@ -134,7 +134,9 @@ function arrayToFichero($arrayp,$ficherop){
             }else{
                 $linea.=$arrayp[$i][$j];
             }
-            
+            if($arrayp[$i]==count($arrayp)){
+                $linea.=$arrayp[$i][$j];
+            }
         }
         fputs($varfich,$linea);
     }
@@ -155,4 +157,28 @@ function hoy(){
     date_default_timezone_set('Europe/Madrid');
     $hoy=date('d/m/Y');
     return $hoy;
+}
+
+//Funcion pasar UNIX a date CHECKED
+function unixDate($segundosp){
+    $fecha=date("d/m/Y",$segundosp);
+    return $fecha;
+}
+
+//Pasar date a unix CHECKED
+function dateUnix($fechap,$separador){
+    list($dia,$mes,$año)=explode($separador,$fechap);//Teniendo una fecha en formato "d/m/y, lo separa"
+    $fechaUNIX=mktime(0,0,0,$mes,$dia,$año);    //mktime para a segundos
+    return $fechaUNIX;
+}
+
+//Funcion edad CHECKED
+function edad($fechaNac,$separador){
+    list($dia,$mes,$anyo)=explode($separador,$fechaNac);
+    $diaHoy=date("d");$mesHoy=date("m");$anyoHoy=date("Y");
+    $anyos=$anyoHoy-$anyo;
+    if(($mesHoy<$mes)||(($mesHoy==$mes)&&($diaHoy<$dia))){
+        $anyos=$anyos-1;
+    }
+    return $anyos;
 }
