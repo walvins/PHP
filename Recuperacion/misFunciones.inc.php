@@ -144,13 +144,22 @@ function arrayToFichero($arrayp,$ficherop){
     fclose($varfich);
 }
 
-//Borrar todo el contenido de un fichero
+//Borrar todo el contenido de un fichero CHECKED
 function borrarTexto($ficherop){
     $arch="";
     $arch = fopen ("players.txt", "w+");
     fwrite($arch, "");
     fclose($arch);
 }
+
+
+//Añadir una linea al final de un fichero CHECKED
+function nuevaLinea($ficherop,$textop){
+    $fp = fopen($ficherop, 'a'); //Abrimos el archivo con solo escritura ("a") para asegurar que va al final
+    fwrite($fp, $textop);    
+    fclose($fp);
+}
+
 
 //Funcion de la fecha de hoy formato dia/mes/año
 function hoy(){
@@ -167,8 +176,8 @@ function unixDate($segundosp){
 
 //Pasar date a unix CHECKED
 function dateUnix($fechap,$separador){
-    list($dia,$mes,$año)=explode($separador,$fechap);//Teniendo una fecha en formato "d/m/y, lo separa"
-    $fechaUNIX=mktime(0,0,0,$mes,$dia,$año);    //mktime para a segundos
+    list($dia,$mes,$anyo)=explode($separador,$fechap);//Teniendo una fecha en formato "d/m/y, lo separa"
+    $fechaUNIX=mktime(0,0,0,$mes,$dia,$anyo);    //mktime para a segundos
     return $fechaUNIX;
 }
 

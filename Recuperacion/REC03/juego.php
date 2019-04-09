@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MasterMind</title>
+    <style>
+    td{
+        border:2px solid black;
+    }
+    </style>
 </head>
 <body>
     <?php
