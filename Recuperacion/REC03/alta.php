@@ -21,16 +21,15 @@
             $pass=$_POST["pass"];
             $texto="players.txt";
             $hoy=hoy();
-            $nuevoUser=array($user,$pass,"0",$hoy);
+            $nuevoUser=PHP_EOL.$user."~".$pass."~100~".$hoy;   //Para añadir al final guardamos la cadena con los datos
             $usuarios=ficheroToArray($texto);
             $fila=busquedaFilaSecuencial($usuarios,$user,0);
-            echo $fila;
+            //echo $fila;
             if($fila!==false){
                 echo '<script>alert("El usuario ya existe");</script>';                
             }else{
-                array_push($usuarios,$nuevoUser);
-                borrarTexto($texto);
-                arrayToFichero($usuarios,$texto);
+                $fichero="players.txt";
+                nuevaLinea($fichero,$nuevoUser);
             }
 
         }

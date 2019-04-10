@@ -10,6 +10,10 @@
         td{
             border:2px solid black;
         }
+        div{
+            border:2px red dashed;
+            position:absolute;
+        }
     </style>
 </head>
 <body>
@@ -63,8 +67,27 @@
         <?php
         $cabecera=array("usuario","intentos","fecha");
         $usuarios=ficheroToArray("players.txt");
-        $usuarios=burbuja($usuarios,2);
-        
+        $arrayTop=array();
+
+        //Idea: convertir todas las fechas a unix, burbujear, coger las unix de la ultima semana, reconvertir a la fecha normal, mostrar
+
+        //Convertir a unix
+        for ($i=0; $i <count($usuarios) ; $i++) { 
+            $usuarios[$i][3]=dateUnix($usuarios[$i][3],"/");
+        }
+
+        //Burbujear
+        $usuarios=burbuja($usuarios,3);
+
+        //Guardar los de los ultimos 7 dias en unix
+        //Hace 7 dias en unix:
+        $semanaAtras=time()-(7*24*60*60);
+
+        for ($i=0; $i <count($usuarios) ; $i++) { 
+            if($usuarios[$i][3]>$semanaAtras)
+        }
+
+        mostrarTabla($cabecera,$usuarios);
         ?>
     <div>
 </body>
