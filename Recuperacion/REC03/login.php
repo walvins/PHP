@@ -63,7 +63,7 @@
     ?>
 
     <div>
-        <h1>top 5 de la semana</h1>
+        <h1>top 5 de los ultimos 7 dias</h1>
         <?php
         $cabecera=array("usuario","intentos","fecha");
         $usuarios=ficheroToArray("players.txt");
@@ -84,10 +84,22 @@
         $semanaAtras=time()-(7*24*60*60);
 
         for ($i=0; $i <count($usuarios) ; $i++) { 
-            if($usuarios[$i][3]>$semanaAtras)
+            if($usuarios[$i][3]>$semanaAtras){
+                $usuarios[$i][3]=unixDate($usuarios[$i][3]);
+                $arrayTop[]=array($usuarios[$i][0],$usuarios[$i][2],$usuarios[$i][3]);
+            }
         }
 
-        mostrarTabla($cabecera,$usuarios);
+        mostrarTabla($cabecera,$arrayTop);
+        burbuja($arrayTop,1);
+        mostrarTabla($cabecera,$arrayTop);
+
+        $topCinco=array();
+        for ($i=0; $i <5 ; $i++) { 
+            $topCinco[]=array($arrayTop[$i][0],$arrayTop[$i][1],$arrayTop[$i][2]);
+        }
+
+        mostrarTabla($cabecera,$topCinco);
         ?>
     <div>
 </body>
