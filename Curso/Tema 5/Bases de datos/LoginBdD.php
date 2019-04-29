@@ -46,7 +46,7 @@ echo '<form method="POST" action="LoginBdD.php">
 <label>ID: <input type="text" name="usuario"> </label><br>
 <label>Contraseña: <input type="text" name="contra"> </label><br>
 <button type="submit" name="Enviar">Enviar</Button>
-<form>';
+</form>';
 ?>  
 </body>
 </html>
