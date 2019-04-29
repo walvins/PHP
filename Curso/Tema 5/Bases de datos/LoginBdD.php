@@ -15,7 +15,7 @@ if(isset($_POST["Enviar"])){
         $usuario=$_POST["usuario"];
         $pass=$_POST["contra"];
         //Conexion
-        $link= mysqli_connect("localhost","Alvaro","Alvaro","tienda");
+        $link= mysqli_connect("localhost","Alvaro","Alvaro","museo");
         $hast=md5($pass);
         $sql="select * from clientes where id_cliente='$usuario' and Contrasena ='$hast'"; //Aqui es donde se hace el login
         $resultado=mysqli_query($link,$sql);
