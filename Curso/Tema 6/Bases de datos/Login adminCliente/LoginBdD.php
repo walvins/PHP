@@ -9,7 +9,6 @@
 <body>
 <?php
 session_start();
-$_SESSION["a"]="asd";
 if(isset($_POST["Enviar"])){
     if(!empty($_POST["usuario"]) || !empty($_POST["contra"])){
         $usuario=$_POST["usuario"];
