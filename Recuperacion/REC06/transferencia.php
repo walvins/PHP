@@ -33,7 +33,7 @@
 
 
         }else{
-            echo "faltan datos"
+            echo "faltan datos";
         }
     }
 ?>

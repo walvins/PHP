@@ -15,34 +15,42 @@
             $pass=$_POST["pass"];
 
             //Conexion con la base de datos
-            $link= mysqli_connect("localhost","alvaro","alvaro","telebank");
+            $link= mysqli_connect("localhost","root","","telebank");
 
             //Pasamos la contraseña a md5
             $hast=md5($pass);
 
-            $sql="select * from clientes where Codigo='$usuario' and contraseña='$hast'";
+            $sql="SELECT * FROM clientes WHERE usuario='$usuario' AND pass='$hast'";
             
+            echo $hast;
             $resultado=mysqli_query($link,$sql);
             if(!$resultado){
                 echo "consulta fallida: ", mysqli_errno($link);
                 exit();
             }
-
+            
+            echo "<br>".mysqli_num_rows($resultado);
             if(mysqli_num_rows($resultado)){    //mysqli_num_rows devuelve la longitud de todos los datos
                 //login correcto
-                $reg=mysqli_fetch_array($resultado,MYSQLI_ASSOC);
+                $reg=mysqli_fetch_array($resultado,MYSQLI_NUM);
+                
                 //$usuario=$reg['id_cliente'];
-                $_SESSION["user"]=$usuario;
-               
-                //Redirección
-                if($reg["rol"]=="admin"){
-                    header("location:backend.php");
-                }
-                if($reg["rol"]=="cliente"){
-                   header("location:cliente.php");
-                }
+                
+                $_SESSION["user"]=$reg[0];
+
                 mysqli_free_result($resultado);
                 mysqli_close($link);
+                
+                //Redirección
+                if($reg[3]=="admin"){
+                    header("location:backend.php");
+                    exit();
+                }
+                if($reg[3]=="cliente"){
+                   header("location:cliente.php");
+                   exit();
+                }
+
             }
         }else{
             echo "faltan datos";
