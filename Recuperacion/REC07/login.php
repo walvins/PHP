@@ -15,7 +15,7 @@
             $pass=$_POST["pass"];
 
             //Conexion con la base de datos
-            $link= mysqli_connect("localhost","root","","telebank");
+            $link= mysqli_connect("localhost","root","","restaurante");
 
             //Pasamos la contraseña a md5
             $hast=md5($pass);
