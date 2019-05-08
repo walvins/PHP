@@ -10,44 +10,44 @@
 <?php
     session_start();
     if(isset($_POST["Enviar"])){
-        if(!empty($_POST["name"])|| !empty($_POST["pass"])){
-            $usuario=$_POST["user"];
+        if(!empty($_POST["user"])&& !empty($_POST["pass"])){
+            $dni=$_POST["user"];
             $pass=$_POST["pass"];
-
+            //dni=pass
             //Conexion con la base de datos
             $link= mysqli_connect("localhost","root","","restaurante");
 
             //Pasamos la contraseña a md5
-            $hast=md5($pass);
+            $hash=md5($pass);
 
-            $sql="SELECT * FROM clientes WHERE usuario='$usuario' AND pass='$hast'";
+            $sql="SELECT * FROM clientes WHERE DNI='$dni' AND Pass='$hash'";
             
-            echo $hast;
+            
             $resultado=mysqli_query($link,$sql);
+            
             if(!$resultado){
                 echo "consulta fallida: ", mysqli_errno($link);
-                exit();
+                //exit();
             }
             
-            echo "<br>".mysqli_num_rows($resultado);
             if(mysqli_num_rows($resultado)){    //mysqli_num_rows devuelve la longitud de todos los datos
                 //login correcto
                 $reg=mysqli_fetch_array($resultado,MYSQLI_NUM);
                 
                 //$usuario=$reg['id_cliente'];
                 
-                $_SESSION["user"]=$reg[0];
+                $_SESSION["dni"]=$reg[0];
 
                 mysqli_free_result($resultado);
                 mysqli_close($link);
                 
                 //Redirección
-                if($reg[3]=="admin"){
+                if($reg[6]=="admin"){
                     header("location:backend.php");
                     exit();
                 }
-                if($reg[3]=="cliente"){
-                   header("location:cliente.php");
+                if($reg[6]=="cliente"){
+                   header("location:cliente/opciones.html");
                    exit();
                 }
 
@@ -61,7 +61,7 @@
 
 
 <form method="POST" action="login.php">
-<label>Codigo de cliente: <input type="text" name="user"> </label><br>
+<label>DNI: <input type="text" name="user"> </label><br>
 <label>Contraseña: <input type="password" name="pass"> </label><br>
 <button type="submit" name="Enviar">Enviar</button>
 <form>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-05-2019 a las 12:23:02
+-- Tiempo de generación: 08-05-2019 a las 12:12:07
 -- Versión del servidor: 10.1.35-MariaDB
 -- Versión de PHP: 7.2.9
 
@@ -61,7 +61,7 @@ INSERT INTO `carta` (`id_producto`, `descripcion`, `tipo`, `precio`) VALUES
 
 CREATE TABLE `clientes` (
   `DNI` varchar(9) COLLATE latin1_spanish_ci NOT NULL,
-  `Contraseña` varchar(32) COLLATE latin1_spanish_ci NOT NULL,
+  `Pass` varchar(32) COLLATE latin1_spanish_ci NOT NULL,
   `Nombre` varchar(10) COLLATE latin1_spanish_ci NOT NULL,
   `Fecha` date NOT NULL,
   `Telefono` int(9) NOT NULL,
@@ -73,7 +73,7 @@ CREATE TABLE `clientes` (
 -- Volcado de datos para la tabla `clientes`
 --
 
-INSERT INTO `clientes` (`DNI`, `Contraseña`, `Nombre`, `Fecha`, `Telefono`, `Localidad`, `Tipo`) VALUES
+INSERT INTO `clientes` (`DNI`, `Pass`, `Nombre`, `Fecha`, `Telefono`, `Localidad`, `Tipo`) VALUES
 ('11111111Q', '21232f297a57a5a743894a0e4a801fc3', 'Root', '1997-11-14', 666666666, 'Burgos', 'admin'),
 ('22222222Q', 'c27b0306a2f9d60b0adc2f30c17c075d', 'cli2', '1997-10-22', 616487598, 'Burgos', 'cliente'),
 ('33333333Q', '09601be2b3c13d4f7a9ab38440408ca8', 'cli3', '1997-02-05', 654875482, 'Villatoro', 'cliente'),
@@ -86,12 +86,13 @@ INSERT INTO `clientes` (`DNI`, `Contraseña`, `Nombre`, `Fecha`, `Telefono`, `Lo
 --
 
 CREATE TABLE `reservas` (
-  `id_reserva` varchar(5) COLLATE latin1_spanish_ci NOT NULL,
+  `id_reserva` int(5) NOT NULL,
   `dni_cliente` varchar(9) COLLATE latin1_spanish_ci NOT NULL,
   `plato1` int(4) NOT NULL,
   `plato2` int(4) NOT NULL,
   `postre` int(4) NOT NULL,
-  `bebida` int(4) NOT NULL
+  `bebida` int(4) NOT NULL,
+  `fecha_reserva` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
 --
@@ -114,11 +115,22 @@ ALTER TABLE `clientes`
 -- Indices de la tabla `reservas`
 --
 ALTER TABLE `reservas`
+  ADD PRIMARY KEY (`id_reserva`),
   ADD KEY `dni_cliente` (`dni_cliente`),
   ADD KEY `plato1` (`plato1`),
+  ADD KEY `plato2` (`plato2`),
   ADD KEY `postre` (`postre`),
-  ADD KEY `bebida` (`bebida`),
-  ADD KEY `plato2` (`plato2`);
+  ADD KEY `bebida` (`bebida`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `reservas`
+--
+ALTER TABLE `reservas`
+  MODIFY `id_reserva` int(5) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas

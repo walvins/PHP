@@ -164,7 +164,7 @@ function nuevaLinea($ficherop,$textop){
 //Funcion de la fecha de hoy formato dia/mes/año
 function hoy(){
     date_default_timezone_set('Europe/Madrid');
-    $hoy=date('d/m/Y');
+    $hoy=dateUnix(date('d/m/Y'));
     return $hoy;
 }
 
