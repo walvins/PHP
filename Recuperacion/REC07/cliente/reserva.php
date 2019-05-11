@@ -19,6 +19,34 @@
             $fecha=$_POST["fecha"];
             $cliente=$_SESSION["dni"];
 
+            //Comprobar que ese dia no hay mas de 10 reservas
+            $link= mysqli_connect("localhost","root","","restaurante");
+            $sql="SELECT count(id_reserva) FROM reservas where fecha_reserva='$fecha'";
+            $resultado=mysqli_query($link, $sql);
+
+            $reg=mysqli_fetch_array($resultado,MYSQLI_NUM);
+            if($reg[0]>10){
+                echo "Lo sentimos, las reservas para este dia estan llenas";
+            }
+            mysqli_free_result($resultado);     //Preguntar si esto es necesario cada vez que hacemos consulta o solo al final
+            mysqli_close($link);
+
+            //Comprobar si el cliente ya tiene alguna reserva
+            /*$link= mysqli_connect("localhost","root","","restaurante");
+            $sql="SELECT dni_cliente FROM reservas where dni_cliente='$cliente' AND fecha_reserva='$fecha'";
+
+            $resultado=mysqli_query($link, $sql);
+
+            if($resultado){
+                echo "El cliente ya tiene una reserva este dia";
+                exit();
+            }
+
+            $reg=mysqli_fetch_array($resultado,MYSQLI_NUM);
+
+            mysqli_free_result($resultado);     //Preguntar si esto es necesario cada vez que hacemos consulta o solo al final
+            mysqli_close($link);*/
+
             //Comprobar que la fecha es de aqui a una semana NOTA: la fecha que devielve option es formato año-mes-dia
             list($anyo,$mes,$dia)=explode("-",$fecha);
             $fechaUNIX=mktime(0,0,0,$mes,$dia,$anyo);    //mktime para a milisegundos
@@ -28,11 +56,13 @@
             $mañana=$hoy+(24*60*60);
             $unaSemana=$hoy+(7*24*60*60);
             if(($fechaUNIX<$mañana)||($fechaUNIX>$unaSemana)){
-                echo "La reserva solo puede desde mañana hasta maximo de 7 dias";
+                echo "<script>alert('La reserva solo puede desde mañana hasta maximo de 7 dias')</script>";
             }else{
                 //Si estamos aqui es que podemos hacer la reserva(Si el cliente no tiene reserva)
                 $link= mysqli_connect("localhost","root","","restaurante");
-                $sql= "INSERT INTO reservas(id_reserva, dni_cliente, plato1,plato2,postre,bebida,fecha_reserva)VALUES('','$cliente','$plato1','$plato2','$postre','$bebida','$fecha')";
+                $sql= "INSERT INTO reservas(dni_cliente, plato1,plato2,postre,bebida,fecha_reserva)VALUES('$cliente','$plato1','$plato2','$postre','$bebida','$fecha')";
+                mysqli_query($link,$sql);  
+                mysqli_close($link);
             }
         }
 
