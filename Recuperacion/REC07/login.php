@@ -43,7 +43,7 @@
                 
                 //Redirección
                 if($reg[6]=="admin"){
-                    header("location:backend.php");
+                    header("location:admin/backend.php");
                     exit();
                 }
                 if($reg[6]=="cliente"){
