@@ -32,17 +32,20 @@
                     //2º Que la devolucion no excede los 30 dias
                     list($anyo_devolucion,$mes_devolucion,$dia_devolucion)=explode("-",$devolucion);
                     $fechaUNIX_devolucion=mktime(0,0,0,$mes_devolucion,$dia_devolucion,$anyo_devolucion);
-                    $tope=$fechaUNIX_recogida+(30*60*60);
+                    $tope=$fechaUNIX_recogida+(30*24*60*60);
                     if($fechaUNIX_devolucion>$tope){
                         echo "<script>alert('La reserva solo puede durar 30 dias maximo')</script>";
                     }else{
                         //3º Que el cliente no tenga ya reservas ese dia
                         $link= mysqli_connect("localhost","root","","concesionario");
-                        $sql="SELECT email_cliente FROM reservas WHERE email='$mail' and entrega='$recogida'";  
+                        $sql="SELECT email_cliente FROM reservas WHERE email='$cliente' and entrega='$recogida'";  
                         $resultado=mysqli_query($link,$sql);
 
                         if(!$resultado){
-                            echo "consulta fallida: ", mysqli_errno($link);
+                            $_SESSION["recogida"]=$recogida;
+                            $_SESSION["devolucion"]=$devolucion;
+                            header("location:reserva.php");
+                            exit();
                         }
                         if(mysqli_num_rows($resultado)){    //mysqli_num_rows devuelve la longitud de todos los datos
                             $reg=mysqli_fetch_array($resultado,MYSQLI_NUM);
@@ -51,11 +54,6 @@
 
                             if($reg[0]==$cliente){
                                 echo "<script>alert('Usted ya tiene reservado un coche ese dia')</script>";
-                            }else{
-                                $_SESSION["recogida"]=$recogida;
-                                $_SESSION["devolucion"]=$devolucion;
-                                header("location:reserva.php");
-                                exit();
                             }
                             
                         }

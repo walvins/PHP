@@ -181,6 +181,12 @@ function dateUnix($fechap,$separador){
     return $fechaUNIX;
 }
 
+//Pasar date a unix pero en formato año,mes,dia
+function dateUnixPHP($fechap){
+    list($anyo,$mes,$dia)=explode("-",$fechap);//Teniendo una fecha en formato "y/m/d, lo separa"
+    $fechaUNIX=mktime(0,0,0,$mes,$dia,$anyo);    //mktime pasa a segundos
+    return $fechaUNIX;
+}
 //Funcion edad CHECKED
 function edad($fechaNac,$separador){
     list($dia,$mes,$anyo)=explode($separador,$fechaNac);
