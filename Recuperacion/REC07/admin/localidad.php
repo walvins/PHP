@@ -17,37 +17,38 @@
             //exit();
         }
 
-        if(mysqli_num_rows($resultado)){    
+        if(mysqli_num_rows($resultado)){  
+            $clientesFacturas=array();  
             $datosReserva=mysqli_fetch_all($resultado,MYSQLI_NUM);
-            $clientesFacturas=array();
-            $factura=0;
-            for ($i=0; $i <count($datosReserva) ; $i++) { 
-                for ($x=0; $x <count($datosReserva[$i]) ; $x++) { 
-                    $link2= mysqli_connect("localhost","root","","restaurante");
-                    $sql2="SELECT id_producto, precio FROM carta";  
-                    $resultado2=mysqli_query($link,$sql);
+            
 
-                    if(!$resultado2){
-                        echo "consulta fallida: ", mysqli_errno($link);
-                        //exit();
-                    }
+            $link2= mysqli_connect("localhost","root","","restaurante");
+            $sql2="SELECT id_producto, precio FROM carta";  
+            $resultado2=mysqli_query($link2,$sql2);
 
-                    if(mysqli_num_rows($resultado2)){
-                        $datosCarta=mysqli_fetch_all($resultado2,MYSQLI_NUM);
-                        for ($j=0; $j <count($datosCarta) ; $j++) { 
-                            if($datosReserva[$i][x]==$datosCarta[$j][0]){
-                                $factura+=$datosCarta[$j][1];
+            if(!$resultado2){
+                echo "consulta fallida: ", mysqli_errno($link);
+                //exit();
+            }
+            
+            if(mysqli_num_rows($resultado2)){
+            $datosCarta=mysqli_fetch_all($resultado2,MYSQLI_NUM);
+
+                for ($i=0; $i <count($datosReserva) ; $i++) { 
+                    $factura=0;
+                    for ($j=1; $j <count($datosReserva[$i]) ; $j++) { 
+                        for ($x=0; $x <count($datosCarta) ; $x++) { 
+                            if($datosReserva[$i][$j]==$datosCarta[$x][0]){
+                                $factura+=$datosCarta[$x][1];
                             }
                         }
                     }
-                    mysqli_free_result($resultado2);
-                    mysqli_close($link2); 
+                    $clientesFacturas[]=array($datosReserva[$i][0],$factura);
                 }
-            $clientesFacturas[]=array($datosReserva[$i][0],$factura);
-            $factura=0;
             }
         }
-
+        //Ya tenemos en clientes el dni con la factura
+        
     ?>
 </body>
 </html>
