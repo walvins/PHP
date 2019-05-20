@@ -15,6 +15,17 @@
         if(!empty($_POST["coche"])){
             $cliente=$_SESSION["mail"];
             $coche=$_POST["coche"];
+            $recogida=$_SESSION["recogida"];
+            $devolucion=$_SESSION["devolucion"];
+            //Insercion
+            $link= mysqli_connect("localhost","root","","concesionario");
+            $sql="INSERT INTO reservas(email_cliente,id_coche,entrega,devolucion) VALUES('$cliente','$coche','$recogida','$devolucion')";
+            if(!mysqli_query($link,$sql)){
+                echo "error en el alta <br>";
+            }  
+            mysqli_close($link);
+            session_destroy();
+            header("location:login.php");
 
         }
     }
@@ -41,6 +52,7 @@
         echo "consulta fallida: ", mysqli_errno($link);
         exit();
     }
+
     if(mysqli_num_rows($resultado)===0){
         //Si entra aqui es que no hay reservas, por lo tanto mostrará todos los coches
         $link2= mysqli_connect("localhost","root","","concesionario");
@@ -64,36 +76,10 @@
             <label>Vehiculo: <select name='coche'>".$opciones."</select></label><br>   
             <button type='submit' name='enviar'>Confirmar pedido</button>
             </form>";
-    }
+        }
+    }else if(mysqli_num_rows($resultado)){    //mysqli_num_rows devuelve la longitud de todos los datos
+            $reg=mysqli_fetch_all($resultado,MYSQLI_NUM);
 
-    else if(mysqli_num_rows($resultado)){    //mysqli_num_rows devuelve la longitud de todos los datos
-        $reg=mysqli_fetch_all($resultado,MYSQLI_NUM);
-/*        if(count($reg===0)){
-            //Si entra aqui es que no hay reservas, por lo tanto mostrará todos los coches
-            $link2= mysqli_connect("localhost","root","","concesionario");
-            $sql2="SELECT id, modelo, marca ,precio FROM coches";
-            $resultado2=mysqli_query($link2,$sql2);
-
-            if(!$resultado2){
-                echo "consulta fallida: ", mysqli_errno($link);
-                exit();
-            }
-
-            if(mysqli_num_rows($resultado2)){
-                $reg=mysqli_fetch_all($resultado2,MYSQLI_NUM);
-                $opciones="";
-                for ($i=0; $i <count($reg) ; $i++) { 
-                    $opciones.="<option value='".$reg[$i][0]."'>".$reg[$i][2]." ".$reg[$i][1]." -Precio por dia: ".$reg[$i][3]."</option>";
-                }
-                mysqli_free_result($resultado2);
-                mysqli_close($link2);
-                echo"<form method='POST' action='reserva.php'> 
-                <label>Vehiculo: <select name='coche'>".$opciones."</select></label><br>   
-                <button type='submit' name='enviar'>Confirmar pedido</button>
-                </form>";
-            }
-*/
-        }else{
             for ($i=0; $i <count($reg) ; $i++) { 
                 $reg1UNIX=dateUnixPHP($reg[$i][1]); //En el caso de que haya reserva, aqui se almacena el inicio de la reserva
                 $reg2UNIX=dateUnixPHP($reg[$i][2]); //En el caso de que haya reserva, aqui se almacena el final de la reserva
@@ -111,6 +97,8 @@
 
             $sql="SELECT * FROM coches";
 
+            $resultado=mysqli_query($link,$sql);
+        
             if(!$resultado){
                 echo "consulta fallida: ", mysqli_errno($link);
                 exit();
@@ -127,19 +115,16 @@
                     } 
                     
                 }
-                mysqli_free_result($resultado2);
-                mysqli_close($link2);
+                mysqli_free_result($resultado);
+                mysqli_close($link);
                 echo"<form method='POST' action='reserva.php'> 
                 <label>Vehiculo: <select name='coche'>".$opciones."</select></label><br>   
                 <button type='submit' name='enviar'>Confirmar pedido</button>
                 </form>";
             }
-        } 
+        
     }
 
-    
     ?>
-
-    
 </body>
 </html>
