@@ -44,11 +44,51 @@
                         }
                     }
                     $clientesFacturas[]=array($datosReserva[$i][0],$factura);
+                    
                 }
             }
         }
-        //Ya tenemos en clientes el dni con la factura
-        
+        mysqli_free_result($resultado);
+        mysqli_close($link);
+        mysqli_free_result($resultado2);
+        mysqli_close($link2);
+        //Ya tenemos en clientesFacturas el dni con la factura
+        print_r($clientesFacturas);
+        echo "<br>";
+
+        //Pasamos a los clientes
+        $link= mysqli_connect("localhost","root","","restaurante");
+        $sql="SELECT DNI, Localidad FROM clientes ORDER BY Localidad";
+        $resultado=$resultado=mysqli_query($link,$sql);
+
+        if(!$resultado){
+            echo "consulta fallida: ", mysqli_errno($link);
+            //exit();
+        }
+
+        if(mysqli_num_rows($resultado)){
+            $provinciaFactura=array();//Guardar aqui la provincia con la factura
+            $datosCliente=mysqli_fetch_all($resultado,MYSQLI_NUM);
+            print_r($datosCliente);
+            echo "<br>";
+            for ($i=0; $i <count($clientesFacturas) ; $i++) { 
+                for ($j=0; $j <count($datosCliente) ; $j++) { 
+                    if($clientesFacturas[$i][0]==$datosCliente[$j][0]){
+                        echo "Cliente: ".$clientesFacturas[$i][0]." Localidad: ".$datosCliente[$j][1]." Factura: ".$clientesFacturas[$i][1]."<br>";//Hasta aqui bien
+                        if(empty($provinciaFactura)){
+                            $provinciaFactura[]=array($datosCliente[$j][1],$clientesFacturas[$i][1]);
+                        }else{
+                            $localidadActual=$datosCliente[$j][1];
+                            while($localidadActual!=$datosCliente[$j][1]){
+                                
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        print_r($provinciaFactura);
     ?>
 </body>
 </html>
