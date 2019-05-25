@@ -27,23 +27,58 @@
     </style>
 </head>
 <body>
+<?php
+         session_start();
+         if(isset($_POST["Enviar"])){
+             if(!empty($_POST["name"])){
+                 $usuario=$_POST["user"];
+     
+                 //Conexion con la base de datos
+                 $link= mysqli_connect("localhost","root","","museo");
+     
+     
+                 $sql="SELECT email_guia FROM guias WHERE usuario='$usuario' ";
+                 
+                 echo $hast;
+                 $resultado=mysqli_query($link,$sql);
+                 if(!$resultado){
+                     echo "consulta fallida: ", mysqli_errno($link);
+                     exit();
+                 }
+                 
+                 if(mysqli_num_rows($resultado)===0){ //es un visitante
+                        header("location:cliente.php");
+                        exit();
+                 }else{    //mysqli_num_rows devuelve la longitud de todos los datos
+                     //login correcto
+                     $reg=mysqli_fetch_array($resultado,MYSQLI_NUM);
+                
+                     $_SESSION["user"]=$reg[0];
+     
+                     mysqli_free_result($resultado);
+                     mysqli_close($link);
+                     
+                     //Redirección
+                         header("location:admin_pass.php");
+                         exit();
+
+                     
+     
+                 }
+             }else{
+                 echo "faltan datos";
+             }
+         }
+        }
+        ?>
     <form method="POST" action="login.php">
     <fieldset>
     <legend>LOGIN</legend>
     <label>Introduce el correo: <input type="text" name="user" size=40></label><br>
-    <label id="psw">Contraseña: <input type="pass" name="pass" size=50></label><br>
     <button type="submit" name="enviar">Comprobar correo</button>
     </fieldset>
     </form>
 
-    <?php
-        if(isset($_POST["enviar"])){
-            if(empty($_POST["user"])){
-                echo '<script>alert("Introduce el email");</script>';
-            }else if((!empty($_POST["user"]))&&(empty($_POST["pass"]))){
-
-            }
-        }
-        ?>
+    
 </body>
 </html>
