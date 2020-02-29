@@ -8,7 +8,7 @@
 </head>
 <body>
     <?php
-        $datos=array(array("11111111", "Martin Alvaro","22/10/1997","Burgos","Quintanadueñas"),
+        $datos=array(array("11111111", "Narganes Alvaro","22/10/1997","Burgos","Quintanadueñas"),
         array("22222222", "Perez Raul","27/04/1999","Zamora","Toro"),
         array("33333333", "Esteban Raul","24/11/1990","Burgos","Aardeñadijo"),
         array("44444444", "Mueriel Maria","13/12/2000","Burgos","Zambron"),
