@@ -1,0 +1,85 @@
+.box-registro{
+    /*Solucionar problema, se sale de la pantalla en el top al meter mas elementos*/   
+    width: 300px;
+    padding: 40px;
+    position: absolute;
+    top: 56%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    background: #30836a;
+    border: 2px solid white;
+    border-radius: 2%;
+    text-align: center;
+}
+
+#logo{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+.sign_in h1{
+    color:white;
+    text-transform: uppercase;
+    font-weight: 550;
+}
+.campo{
+    margin-bottom: 40px;
+}
+
+.campo label{
+    padding-bottom: 0px;
+    color: white;
+    font-size: small;
+    text-align: left ;
+}
+
+.sign_in input{
+border:0;
+background: none;
+display: block;
+margin: 20px auto;
+text-align: center;
+border: 1px solid white;
+padding: 14px 10px;
+width: 200px;
+outline:none;
+color: white;
+border-radius: 24px;
+transition: 0.25s;
+}
+
+.sign_in input:focus{
+    width: 280px;
+    border-color:#2ecc71;
+}
+
+.sign_in input[type="submit"]{
+border:0;
+background: none;
+display: block;
+margin: 20px auto;
+text-align: center;
+border: 2px solid #2ecc71;
+padding: 14px 40px;
+width: 200px;
+outline:none;
+color: white;
+border-radius: 24px;
+transition: 0.25s;
+cursor: pointer;
+
+}
+
+.sign_in input[type="submit"]:hover{
+    background:#2ecc71;
+    
+}
+
+.sign_in a{
+    font-size: small;
+    display: inline;
+    position: absolute;
+    left: 15px;
+    line-height: 20px;
+    
+}

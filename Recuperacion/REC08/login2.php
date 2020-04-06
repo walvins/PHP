@@ -72,8 +72,6 @@
 
                 header("location:elegir_fecha.php");
                 exit();
-                
-
             }
         }else{
             echo "faltan datos";

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login de prueba</title>
+    <script src="..\Jquery\Jquery.js"></script>
+    <script src="..\Jquery\Jquery_cookie/jquery.cookie.js"></script>
+    <style>
+        img{
+            height: 100px;
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        valor=$.cookie('error');
+        alert(valor);
+        if(valor=='fallo'){
+            alert("ERROR");
+        }
+    </script>
+    <h1>Esto es una prueba</h1>
+    <div id="Cabecera">
+        <button onclick="mostrar()">BOTON</button>
+        <form id="formu" style="display:none" action="Login.php" method="POST">
+            <div class="form_group">
+                <label for="usuario">Usuario</label>
+                <input type="text" name="usuario" class="form_control">
+            </div>
+            <div class="form_group">
+                <label for="pass">Contraseña</label>
+                <input type="password" name="pass" id="form_control">
+            </div>
+            <input type="submit" value="Enviar" name="submit">
+        </form>
+    </div>
+    <div id="info">
+        <img src="..\img\tenor.gif" alt="je">
+    </div>
+    <script>
+        function mostrar(){
+            if(document.getElementById("formu").getAttribute("style")=="display:none"){
+            document.getElementById("formu").setAttribute("style","display:inline");
+        }else if(document.getElementById("formu").getAttribute("style")=="display:inline"){
+           document.getElementById("formu").setAttribute("style","display:none");
+        }
+        }
+    </script>
+</body>
+</html>
